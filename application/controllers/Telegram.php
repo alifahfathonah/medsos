@@ -11,27 +11,29 @@ class Telegram extends CI_Controller {
 		$this->load->view('theme',$data);		
 	}
 
+	//load table setting telegram
 	public function loadTable()
 	{
 		$this->load->view("telegram/settingTable");
 	}
 
+	//query insert and update setting telegram
 	public function add()
 	{
 		if($this->input->post('idChannel') == '') {
 				$data = array(
-						'channel_name' 			=> $this->input->post('namaChannel'),
+						'channel_name' 		=> $this->input->post('namaChannel'),
 						'chat_id' 			=> $this->input->post('channelID'),
-						'api_token' 			=> $this->input->post('apiToken'),
+						'api_token' 		=> $this->input->post('apiToken'),
 
 				);
 
 				$this->db->insert('telegram_channel', $data);
 		}else{
 				$data = array(
-						'channel_name' 			=> $this->input->post('namaChannel'),
+						'channel_name' 		=> $this->input->post('namaChannel'),
 						'chat_id' 			=> $this->input->post('channelID'),
-						'api_token' 			=> $this->input->post('apiToken'),
+						'api_token' 		=> $this->input->post('apiToken'),
 
 				);
 
@@ -39,6 +41,7 @@ class Telegram extends CI_Controller {
 		}
 	}
 
+	//get value telegram channel
 	public function get()
 	{
 		if(isset($_POST["idChannel"]))  
@@ -54,10 +57,109 @@ class Telegram extends CI_Controller {
 			} 
 	}
 
+	// delete setting telegram
 	public function delete()
 	{
 		$id = $this->input->post('idChannel2');
 		$this->db->delete('telegram_channel', array('id_channel' => $id)); 
+	}
+
+	//add and edit telegram proses
+	public function addProses()
+	{
+		if($this->input->post('idChannel') ==''){
+			if($this->input->post('period')=="1"){
+				$timeto24 = date("H:i", strtotime($this->input->post('timeSend1')));
+				$data = array(
+					'nama_proses'	=> $this->input->post('namaChannel'),
+					'looping'		=> $this->input->post('period'),
+					'channel_id'	=> $this->input->post('channelID'),
+					'konten'		=> $this->input->post('konten'),					
+					'loopevery' 	=> $this->input->post('loopEvery'),
+					'startdatetime' => $this->input->post('dateSend1')." ".$timeto24,
+				);
+			}else{
+				$timeto24 = date("H:i", strtotime($this->input->post('timeSend')));
+				$data = array(
+					'nama_proses'	=> $this->input->post('namaChannel'),
+					'looping'		=> $this->input->post('period'),
+					'channel_id'	=> $this->input->post('channelID'),
+					'konten'		=> $this->input->post('konten'),					
+					'startdatetime' => $this->input->post('dateSend')." ".$timeto24,
+				);				
+			}
+
+			$this->db->insert('telegram_proses', $data);
+		}else{
+			if($this->input->post('period')=="1"){
+				$timeto24 = date("H:i", strtotime($this->input->post('timeSend1')));
+				$data = array(
+					'nama_proses'	=> $this->input->post('namaChannel'),
+					'looping'		=> $this->input->post('period'),
+					'channel_id'	=> $this->input->post('channelID'),
+					'konten'		=> $this->input->post('konten'),					
+					'loopevery' 	=> $this->input->post('loopEvery'),
+					'startdatetime' => $this->input->post('dateSend1')." ".$timeto24,
+				);
+			}else{
+				$timeto24 = date("H:i", strtotime($this->input->post('timeSend')));
+				$data = array(
+					'nama_proses'	=> $this->input->post('namaChannel'),
+					'looping'		=> $this->input->post('period'),
+					'channel_id'	=> $this->input->post('channelID'),
+					'konten'		=> $this->input->post('konten'),					
+					'startdatetime' => $this->input->post('dateSend')." ".$timeto24,
+				);				
+			}
+
+			$this->db->where('id_channel', $this->input->post('idChannel'))->update('telegram_proses', $data); 				
+		}
+	}
+
+	//load table non loop
+	public function loadTableProsesNonLoop()
+	{
+		$this->load->view('telegram/prosesTableNonLoop');
+	}
+
+	//get value telegram proses
+	public function getProses()
+	{
+		if(isset($_POST["idChannel"]))  
+			{  
+				$getChannel = $_POST["idChannel"];
+				$query = $this->db->query("SELECT *
+											FROM 
+												telegram_proses
+											WHERE 
+												id_telegram_proses = '$getChannel'");  
+				$row = $query->row();
+				echo json_encode($row);  
+			} 
+	}
+
+	//load table non loop done
+	public function loadTableProsesNonLoopDone()
+	{
+		$this->load->view('telegram/prosesTableNonLoopDone');
+	}
+
+	//load table non loop
+	public function loadTableProsesLoop()
+	{
+		$this->load->view('telegram/prosesTableLoop');
+	}
+
+	//load table non loop
+	public function loadTableProsesLoopDone()
+	{
+		$this->load->view('telegram/prosesTableLoopDone');
+	}				
+
+	public function deleteProses()
+	{
+		$id = $this->input->post('idProses');
+		$this->db->delete('telegram_proses', array('id_telegram_proses' => $id)); 
 	}
 }
 

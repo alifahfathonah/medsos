@@ -2,10 +2,14 @@
 	<thead>
 		<tr>
 			<th>No.</th>
-			<th>Nama Channel</th>
-			<th>Chat ID Bot</th>
-			<th>API Token</th>
-			<th>Action</th>
+			<th>Nama Proses</th>
+			<th>Waktu Awal Proses</th>
+			<th>Looping</th>
+			<th>Loping Setiap</th>
+			<th>Channel ID</th>
+			<th>Konten</th>
+			<th>Aksi</th>
+
 		</tr>
 	</thead>
 	<tbody>	                	
@@ -19,10 +23,13 @@
 				<td><center><?php echo $row->channel_name; ?></center></td>
 				<td><center><?php echo $row->chat_id; ?></center></td>
 				<td><center><?php echo $row->api_token; ?></center></td>
+				<td><center><?php echo $row->api_token; ?></center></td>
+				<td><center><?php echo $row->api_token; ?></center></td>
+				<td><center><?php echo $row->api_token; ?></center></td>
 				<td>
 					<center>
 						<input type="button" value="Edit" class="btn btn-success btn-xs editChannel" id="<?php echo $row->id_channel;?>"/>
-						<input type="button" value="Delete" class="btn btn-danger btn-xs deleteChannel" id="<?php echo $row->id_channel;?>"/>
+						<input type="button" value="Delete" class="btn btn-primary btn-xs deleteChannel" id="<?php echo $row->id_channel;?>"/>
 						<br/>																								
 					</center>
 				</td>
