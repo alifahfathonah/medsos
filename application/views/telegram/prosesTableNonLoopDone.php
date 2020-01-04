@@ -23,7 +23,7 @@
 				<td><center><a href="#" class="viewKonten" id="<?php echo $row->id_telegram_proses;?>">View</a></center></td>
 				<td>
 					<center>
-						<input type="button" value="Edit" class="btn btn-success btn-xs editChannel" id="<?php echo $row->id_telegram_proses;?>"/>
+						<input type="button" value="Edit" class="btn btn-success btn-xs editChannelModal" id="<?php echo $row->id_telegram_proses;?>"/>
 						<input type="button" value="Delete" class="btn btn-danger btn-xs deleteChannel" id="<?php echo $row->id_telegram_proses;?>"/>
 						<br/>																								
 					</center>

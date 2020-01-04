@@ -8,7 +8,7 @@
           <input type="button" value="Tambah Penjualan" class="btn btn-info btn-xs addTelegram" /><br/><br/>
           <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#nonLoop">Channel Non Looping</a></li>
-            <li><a data-toggle="tab" href="#done">Channel Looping Done</a></li>
+            <li><a data-toggle="tab" href="#done">Channel Non Looping Done</a></li>
             <li><a data-toggle="tab" href="#looping">Channel Looping</a></li>
             <li><a data-toggle="tab" href="#stopLooping">Channel Looping Stop</a></li>
           </ul>
@@ -117,7 +117,7 @@
                       <label>Konten</label>  
                       <textarea class="textarea" placeholder="Place some text here" name="konten" id="konten"
                       style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px; max-width: 560px;min-width: 560px;max-height: 140px;min-height: 140px;" required></textarea>
-                      <input type="text" name="idChannel" id="idChannel" class="form-control" />
+                      <input type="hidden" name="idChannel" id="idChannel" class="form-control" />
                     </div>
                 </div>  
                 <div class="modal-footer">
@@ -143,7 +143,7 @@
               </div>
               <div class="modal-footer">
               <form class="deleteProses" method="POST" autocomplete="off">
-                  <input type="text" name="idProses" id="idProses" />  
+                  <input type="hidden" name="idProses" id="idProses" />  
                   <input type="submit" name="hapusChannel" value="Yes" class="btn btn-success" />
                   <input type="button" name="cancel" value="Cancel" class="btn btn-success" data-dismiss="modal"/>
               </form>
@@ -170,6 +170,29 @@
           </div>
       </div>
   </div>  
+
+    <div class="modal fade" id="enabledDisabled" role="dialog">
+      <div class="modal-dialog">
+
+      <!-- Modal content-->
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title"><span id="titleEnabledDisabled"></span></h4>
+              </div>
+              <div class="modal-body">
+                  <p>Apakah Anda ingin <strong><span id="pilihanAktifasi"></span></strong> proses <strong><span id="viewProses"></span> ?</strong></p>
+              </div>
+              <div class="modal-footer">
+                <form class="confirmProses" method="POST" autocomplete="off">
+                  <input type="hidden" name="idDisableEnable" id="idDisableEnable" />
+                  <input type="submit" name="changeProses" value="Yes" class="btn btn-success" /> 
+                  <input type="button" name="cancel" value="Cancel" class="btn btn-primary" data-dismiss="modal"/>
+                </form>
+              </div>
+          </div>
+      </div>
+  </div>    
 
 <script>
         //menampilkan modal insert
@@ -270,6 +293,7 @@
       
     });
 
+    // menampilkan isi konten
     $(document).on('click', '.viewKonten', function(){ 
          var idChannel = $(this).attr("id");  
          $.ajax({  
@@ -285,6 +309,7 @@
       
     });         
 
+    //form edit proses
     $(document).on('click', '.editChannelModal', function(){ 
          var idChannel = $(this).attr("id");  
          $.ajax({  
@@ -293,7 +318,27 @@
               data:{idChannel:idChannel},  
               dataType:"json",  
               success:function(data){  
-                   // document.getElementById("showKonten").innerHTML = data.konten;
+
+                if(data.looping=="0"){
+                    document.getElementById('onePeriod').style.display = 'inline';
+                    document.getElementById('loopPeriod').style.display = 'none';
+                    $('#dateSend').val(data.tanggal);
+                    $('#timeSend').val(data.jam);
+                    $('#dateSend1').val('');
+                    $('#timeSend1').val('');
+                    $('#loopEvery').val('');
+                    $('input[name=period][value=0]').prop('checked',true);
+                }else{
+                    document.getElementById('loopPeriod').style.display = 'inline';
+                    document.getElementById('onePeriod').style.display = 'none';
+                    $('#dateSend').val('');
+                    $('#timeSend').val('');
+                    $('#dateSend1').val(data.tanggal);
+                    $('#timeSend1').val(data.jam);
+                    $('#loopEvery').val(data.loopevery);
+                    $('input[name=period][value=1]').prop('checked',true);
+                }
+
                 $('#namaChannel').val(data.nama_proses);
                 $('#channelID').val(data.channel_id);
                 $('#konten').val(data.konten);
@@ -304,6 +349,53 @@
       
     });                
 
+    // menampilkan modal disable enable
+    $(document).on('click', '.enabledDisabled', function(){ 
+        var idChannel = $(this).attr("id");
+         $.ajax({  
+              url:"<?php echo site_url()?>/Telegram/getProses",  
+              method:"POST",  
+              data:{idChannel:idChannel},  
+              dataType:"json",  
+              success:function(data){  
+                  if(data.status=="0"){
+                    $('#titleEnabledDisabled').html('Confirmation Disable Proses');
+                    $('#pilihanAktifasi').html('Non Aktifkan');
+                  }else{
+                    $('#titleEnabledDisabled').html('Confirmation Enable Proses');
+                    $('#pilihanAktifasi').html('Aktifkan');
+                  }
+                    $('#idDisableEnable').val(idChannel);
+                    $('#viewProses').html(data.nama_proses);                   
+                    $('#enabledDisabled').modal('show');  
+              }
+         });          
+             
+      
+    });    
+
+
+    //confirm proses
+    $('.confirmProses').on("submit", function(event){  
+      event.preventDefault();  
+        $.ajax({  
+            url:"<?php echo site_url()?>/Telegram/confirmProses",  
+            method:"POST",  
+            data:$('.confirmProses').serialize(),                   
+            success:function(data){
+                  $('#loadChannelNonLoop').load('<?php echo site_url('Telegram/loadTableProsesNonLoop');?>');
+                  $('#loadChannelNonLoopDone').load('<?php echo site_url('Telegram/loadTableProsesNonLoopDone');?>');
+                  $('#loadChannelLoop').load('<?php echo site_url('Telegram/loadTableProsesLoop');?>');
+                  $('#loadChannelLoopDone').load('<?php echo site_url('Telegram/loadTableProsesLoopDone');?>');
+                  $('#enabledDisabled').modal('hide');
+                alert("Status Proses berhasil diubah");
+            },error:function () {
+                alert("Gagal Mengubah Status.");
+                // body...
+            }  
+        });  
+
+    });  
   // CKEDITOR.replace( 'konten', {
   //   toolbar: 'Bold'
   // } );

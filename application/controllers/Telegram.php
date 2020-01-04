@@ -112,7 +112,7 @@ class Telegram extends CI_Controller {
 				);				
 			}
 
-			$this->db->where('id_channel', $this->input->post('idChannel'))->update('telegram_proses', $data); 				
+			$this->db->where('id_telegram_proses', $this->input->post('idChannel'))->update('telegram_proses', $data); 				
 		}
 	}
 
@@ -128,7 +128,7 @@ class Telegram extends CI_Controller {
 		if(isset($_POST["idChannel"]))  
 			{  
 				$getChannel = $_POST["idChannel"];
-				$query = $this->db->query("SELECT *
+				$query = $this->db->query("SELECT *,DATE(startdatetime) AS tanggal,TIME(startdatetime) AS jam
 											FROM 
 												telegram_proses
 											WHERE 
@@ -136,6 +136,22 @@ class Telegram extends CI_Controller {
 				$row = $query->row();
 				echo json_encode($row);  
 			} 
+	}
+
+	public function confirmProses()
+	{
+		$id = $this->input->post('idDisableEnable');
+		$query = $this->db->query("SELECT * FROM telegram_proses WHERE id_telegram_proses ='$id'")->row();
+		if($query->status == "0"){
+			$data = array(
+				'status' => '1',
+			);
+		}else{
+			$data = array(
+				'status' => '0',
+			);
+		}
+		$this->db->where('id_telegram_proses', $id)->update('telegram_proses', $data); 
 	}
 
 	//load table non loop done
