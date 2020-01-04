@@ -12,15 +12,15 @@
 	<tbody>	                	
 		<?php 
 			$i=1;
-			$query = $this->db->query("SELECT * FROM telegram_proses WHERE status='0' AND looping='0'");
+			$query = $this->db->query("SELECT * FROM telegram_proses A INNER JOIN telegram_channel B ON A.CHANNEL_ID = B.ID_CHANNEL WHERE A.status='0' AND A.looping='0'");
 			foreach ($query->result() as $row){              	
 		?>             
 		    <tr>
 				<td><center><?php echo $i; ?></center></td>
 				<td><center><?php echo $row->nama_proses; ?></center></td>
 				<td><center><?php echo $this->Fungsi->dateTime2($row->startdatetime); ?></center></td>
-				<td><center><?php echo $row->channel_id; ?></center></td>
-				<td><center>View</center></td>
+				<td><center><?php echo $row->channel_name; ?></center></td>
+				<td><center><a href="#" class="viewKonten" id="<?php echo $row->id_telegram_proses;?>">View</a></center></td>
 				<td>
 					<center>
 						<input type="button" value="Edit" class="btn btn-success btn-xs editChannelModal" id="<?php echo $row->id_telegram_proses;?>"/>

@@ -117,7 +117,7 @@
                       <label>Konten</label>  
                       <textarea class="textarea" placeholder="Place some text here" name="konten" id="konten"
                       style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px; max-width: 560px;min-width: 560px;max-height: 140px;min-height: 140px;" required></textarea>
-                      <input type="hidden" name="idChannel" id="idChannel" class="form-control" />
+                      <input type="text" name="idChannel" id="idChannel" class="form-control" />
                     </div>
                 </div>  
                 <div class="modal-footer">
@@ -147,6 +147,25 @@
                   <input type="submit" name="hapusChannel" value="Yes" class="btn btn-success" />
                   <input type="button" name="cancel" value="Cancel" class="btn btn-success" data-dismiss="modal"/>
               </form>
+              </div>
+          </div>
+      </div>
+  </div>  
+
+    <div class="modal fade" id="contentViewer" role="dialog">
+      <div class="modal-dialog">
+
+      <!-- Modal content-->
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Isi Konten</h4>
+              </div>
+              <div class="modal-body">
+                  <p><span id="showKonten"></span></p>
+              </div>
+              <div class="modal-footer">
+                <input type="button" name="cancel" value="Cancel" class="btn btn-success" data-dismiss="modal"/>
               </div>
           </div>
       </div>
@@ -249,7 +268,41 @@
               }
          });          
       
-    });        
+    });
+
+    $(document).on('click', '.viewKonten', function(){ 
+         var idChannel = $(this).attr("id");  
+         $.ajax({  
+              url:"<?php echo site_url()?>/Telegram/getProses",  
+              method:"POST",  
+              data:{idChannel:idChannel},  
+              dataType:"json",  
+              success:function(data){  
+                   document.getElementById("showKonten").innerHTML = data.konten;
+                   $('#contentViewer').modal('show');  
+              }
+         });          
+      
+    });         
+
+    $(document).on('click', '.editChannelModal', function(){ 
+         var idChannel = $(this).attr("id");  
+         $.ajax({  
+              url:"<?php echo site_url()?>/Telegram/getProses",  
+              method:"POST",  
+              data:{idChannel:idChannel},  
+              dataType:"json",  
+              success:function(data){  
+                   // document.getElementById("showKonten").innerHTML = data.konten;
+                $('#namaChannel').val(data.nama_proses);
+                $('#channelID').val(data.channel_id);
+                $('#konten').val(data.konten);
+                $('#idChannel').val(idChannel);
+                $('.formAddProses').modal('show');  
+              }
+         });          
+      
+    });                
 
   // CKEDITOR.replace( 'konten', {
   //   toolbar: 'Bold'
