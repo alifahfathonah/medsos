@@ -12,15 +12,23 @@ class ProsesSendKonten extends CI_Controller {
 
 			$data = [
 			    'chat_id' => $row->chat_id,
-			    'text' => $row->konten
+			    'text' => $row->konten,
 			];
 
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+
+			if($row->looping =="0"){
 				$data = array(
 						'send_status' 		=> '1',
-				);
-
-			$this->db->where('id_telegram_proses', $row->id_telegram_proses)->update('telegram_proses', $data); 						
+						'status'			=>'1',
+				); 				
+			}else{
+				$nextSend = date('Y-m-d H:i:s', strtotime($row->startdatetime . ' +'. $row->loopevery .' minutes'));
+				$data = array(
+						'startdatetime' 		=> $nextSend,
+				); 		
+			}
+				$this->db->where('id_telegram_proses', $row->id_telegram_proses)->update('telegram_proses', $data);
 		}	
 	}
 

@@ -100,6 +100,7 @@ class Telegram extends CI_Controller {
 					'konten'		=> $this->input->post('konten'),					
 					'loopevery' 	=> $this->input->post('loopEvery'),
 					'startdatetime' => $this->input->post('dateSend1')." ".$timeto24,
+					'send_status'		=> '0',
 				);
 			}else{
 				$timeto24 = date("H:i", strtotime($this->input->post('timeSend')));
@@ -109,6 +110,7 @@ class Telegram extends CI_Controller {
 					'channel_id'	=> $this->input->post('channelID'),
 					'konten'		=> $this->input->post('konten'),					
 					'startdatetime' => $this->input->post('dateSend')." ".$timeto24,
+					'send_status'		=> '0',
 				);				
 			}
 
