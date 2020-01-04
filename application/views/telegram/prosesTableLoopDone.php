@@ -27,7 +27,7 @@
 				<td>
 					<center>
 						<input type="button" value="Edit" class="btn btn-success btn-xs editChannelModal" id="<?php echo $row->id_telegram_proses;?>"/>
-						<input type="button" value="Delete" class="btn btn-danger btn-xs deleteChannel" id="<?php echo $row->id_telegram_proses;?>"/>
+						<input type="button" value="Delete" class="btn btn-danger btn-xs deleteProsesModal" id="<?php echo $row->id_telegram_proses;?>"/>
 						<input type="button" value="Enable" class="btn btn-primary btn-xs enabledDisabled" id="<?php echo $row->id_telegram_proses;?>"/>						
 						<br/>																								
 					</center>
@@ -39,3 +39,9 @@
 		?>
 	</tbody>
 </table>
+<script type="text/javascript">
+	    //data table
+    $(document).ready(function() {
+        $('.tableAll').DataTable();
+    });  
+</script>

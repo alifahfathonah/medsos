@@ -33,3 +33,9 @@
 		?>
 	</tbody>
 </table>
+<script type="text/javascript">
+	    //data table
+    $(document).ready(function() {
+        $('.tableAll').DataTable();
+    });  
+</script>

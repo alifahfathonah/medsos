@@ -11,8 +11,5 @@
      	showInputs: false
     }); 
 
-    //data table
-    $(document).ready(function() {
-        $('.tableAll').DataTable();
-    });    
+  
 </script>

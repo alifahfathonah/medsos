@@ -69,8 +69,8 @@
               <div class="modal-footer">
               <form class="deleteChannel" method="POST" autocomplete="off">
                   <input type="hidden" name="idChannel2" id="idChannel2" />  
-                  <input type="submit" name="hapusChannel" value="Yes" class="btn btn-success" />
-                  <input type="button" name="cancel" value="Cancel" class="btn btn-success" data-dismiss="modal"/>
+                  <input type="submit" name="hapusChannel" value="Yes" class="btn btn-danger" />
+                  <input type="button" name="cancel" value="Cancel" class="btn btn-primary" data-dismiss="modal"/>
               </form>
               </div>
           </div>
