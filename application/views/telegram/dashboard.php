@@ -105,6 +105,7 @@
                         <div class="col-xs-4">
                             <select class="form-control" name="loopEvery" id="loopEvery">
                               <option value=""> - Choose Time Period - </option>
+                              <option value="0"> Every This Time </option>
                               <?php for($i=1;$i<=12;$i++){
                                   $k= 5 * $i;
                               ?>

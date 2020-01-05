@@ -9,8 +9,8 @@ class ProsesSendKonten extends CI_Controller {
 
 		foreach ($query -> result() as $row) {
 			$apiToken = $row->api_token;
-$emoticons = '\U0001F4A8';
-//$data['text'] =  "your text ".json_decode('"'.$emoticons.'"').' bla bla';
+			$emoticons = '\U0001F4A8';
+			//$data['text'] =  "your text ".json_decode('"'.$emoticons.'"').' bla bla';
 			$data = [
 			    'chat_id' 		=> $row->chat_id,
 			    'text'			=> $row->konten,
@@ -26,7 +26,13 @@ $emoticons = '\U0001F4A8';
 						'status'			=>'1',
 				); 				
 			}else{
-				$nextSend = date('Y-m-d H:i:s', strtotime($row->startdatetime . ' +'. $row->loopevery .' minutes'));
+				if($row->loopevery=="0"){
+					$nextSend = date('Y-m-d H:i:s', strtotime($row->startdatetime . ' +1 days'));
+				}
+				else{
+					$nextSend = date('Y-m-d H:i:s', strtotime($row->startdatetime . ' +'. $row->loopevery .' minutes'));
+				}	
+				
 				$data = array(
 						'startdatetime' 		=> $nextSend,
 				); 		
