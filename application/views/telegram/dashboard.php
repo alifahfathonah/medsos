@@ -116,7 +116,8 @@
                     <div class="form-group"> 
                       <label>Konten</label>  
                       <textarea class="textarea" placeholder="Place some text here" name="konten" id="konten"
-                      style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px; max-width: 560px;min-width: 560px;max-height: 140px;min-height: 140px;" required></textarea>
+                      style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px; max-width: 560px;min-width: 560px;max-height: 140px;min-height: 140px;" oninput="myFunction()" required></textarea>
+                      <!-- <textarea id="lol"></textarea> -->
                       <input type="hidden" name="idChannel" id="idChannel" class="form-control" />
                     </div>
                 </div>  
@@ -195,6 +196,14 @@
   </div>    
 
 <script>
+      //konvert konten
+      // function myFunction() {
+      //   var a = document.getElementById("konten").value;
+      //   var getKonten = encodeURIComponent(a); 
+      //   document.getElementById("lol").value = "fdsfs"+getKonten;
+
+      // }
+
         //menampilkan modal insert
       $(document).on('click', '.addTelegram', function(){  
         $('.formAddProses').modal('show');  
@@ -228,7 +237,7 @@
 
     //insert atau update channel
     $(document).ready(function() {
-      $('#insertChannel').on("submit", function(event){  
+      $('#insertChannel').on("submit", function(event){    
         event.preventDefault();  
           $.ajax({  
               url:"<?php echo site_url()?>/Telegram/addProses",  
@@ -397,7 +406,7 @@
 
     });  
   // CKEDITOR.replace( 'konten', {
-  //   toolbar: 'Bold'
+  //   //toolbar: 'Bold'
   // } );
 
 </script>
