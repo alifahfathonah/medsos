@@ -67,6 +67,7 @@ class Telegram extends CI_Controller {
 	//add and edit telegram proses
 	public function addProses()
 	{
+
 		if($this->input->post('kontenCat')=='0'){
 			$konten = $this->input->post('konten');
 			$contenImage = "";
@@ -76,6 +77,37 @@ class Telegram extends CI_Controller {
 			$contenImage = $this->input->post('imageSend');
 		}	
 
+		$idchan = $this->input->post('channelID');
+
+		$row = $this->db->query("SELECT * FROM telegram_channel WHERE id_channel='$idchan'")->row();
+		$apiToken = $row->api_token;
+
+		if($this->input->post('period')=="2"){
+			if($this->input->post('kontenCat')=="0"){
+				$datar = [
+				    'chat_id' 		=> $row->chat_id,
+				    'text'			=> $konten,
+				    'parse_mode'	=> 'html',
+				];
+
+				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($datar) );
+			}else{
+				$datar = [
+					'chat_id' 		=> $row->chat_id,
+				    'photo'			=> $contenImage,
+				    'caption' 		=> $konten,
+				    'parse_mode'	=> 'html',
+				];
+
+				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendPhoto?" . http_build_query($datar) );				
+			}
+
+			$status = "1";
+			$sendSTatus = "1";
+		}else{
+			$status = "0";
+			$sendSTatus = "0";			
+		}
 
 		if($this->input->post('idChannel') ==''){
 			if($this->input->post('period')=="1"){
@@ -99,8 +131,19 @@ class Telegram extends CI_Controller {
 					'konten'		=> $konten,					
 					'startdatetime' => $this->input->post('dateSend')." ".$timeto24,
 					'type_konten'	=> $this->input->post('kontenCat'),
-					'image_konten'	=> $contenImage,
+					'image_konten'	=> $contenImage,				
 				);				
+			}else{
+				$data = array(
+					'nama_proses'	=> $this->input->post('namaChannel'),
+					'channel_id'	=> $this->input->post('channelID'),
+					'konten'		=> $konten,					
+					'startdatetime' => date('Y-m-d H:i:s'),
+					'type_konten'	=> $this->input->post('kontenCat'),
+					'image_konten'	=> $contenImage,
+					'send_status'	=> $sendSTatus,
+					'status'		=> $status,					
+				);						
 			}
 
 			$this->db->insert('telegram_proses', $data);
@@ -144,6 +187,19 @@ class Telegram extends CI_Controller {
 					'type_konten'	=> $this->input->post('kontenCat'),
 					'image_konten'	=> $contenImage,
 				);				
+			}else{
+				$data = array(
+					'nama_proses'	=> $this->input->post('namaChannel'),
+					'looping'		=> $this->input->post('period'),
+					'channel_id'	=> $this->input->post('channelID'),
+					'konten'		=> $konten,					
+					'startdatetime' => date('Y-m-d H:i:s'),
+					'type_konten'	=> $this->input->post('kontenCat'),
+					'image_konten'	=> $contenImage,
+					'send_status'	=> $sendSTatus,
+					'status'		=> $status,					
+				);	
+
 			}
 
 			$this->db->where('id_telegram_proses', $this->input->post('idChannel'))->update('telegram_proses', $data); 				

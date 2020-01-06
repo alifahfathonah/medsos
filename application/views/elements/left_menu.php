@@ -18,6 +18,7 @@
             <i class="fa fa-telegram"></i> <span>Telegram</span>
           </a>
         </li>
+        <noscript>
         <li <?php 
          $menu_trans_arr= array('instagram');
          if(in_array($this->uri->segment(1), $menu_trans_arr)) {echo "class='active'";}?>>
@@ -38,7 +39,7 @@
           <a href="<?php echo base_url("whatsapp");?>">
             <i class="fa fa-whatsapp"></i> <span>Whats App</span>
           </a>
-        </li>                        
+        </li></noscript>                        
         <li <?php 
          $menu_trans_arr= array('whatsapp','instagram','telegram','facebook');
          if(in_array($this->uri->segment(2), $menu_trans_arr)) {echo "class='treeview active'";}else{echo "class='treeview'";}?>>
@@ -53,6 +54,7 @@
             <li class="<?php if ($this->uri->segment(2) == 'telegram') { echo "active"; } ?>">
               <a href="<?php echo base_url("setting/telegram");?>"><i class="fa fa-telegram"></i> Telegram</a>
             </li>
+            <noscript>
             <li class="<?php if ($this->uri->segment(2) == 'instagram') { echo "active"; } ?>">
               <a href="<?php echo base_url("setting/instagram");?>"><i class="fa fa-instagram"></i> Instagram</a>
             </li>
@@ -62,6 +64,7 @@
             <li class="<?php if ($this->uri->segment(2) == 'whatsapp') { echo "active"; } ?>">
               <a href="<?php echo base_url("setting/whatsapp");?>"><i class="fa fa-whatsapp"></i> Whats App</a>
             </li>
+            </noscript>
           </ul>
         </li>
       </ul>

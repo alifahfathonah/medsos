@@ -22,13 +22,13 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+<!--     <section class="content-header">
       <h1>
         Fixed Layout
         <small>Blank example to the fixed layout</small>
       </h1>
 
-    </section>
+    </section> -->
 
     <!-- Main content -->
     <?php $this->load->view($isi) ?>

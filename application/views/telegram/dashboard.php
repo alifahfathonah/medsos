@@ -80,7 +80,7 @@
                       <label>Period</label><br/>  
                       <input type="radio" name="period" value="0" required> One Time
                       <input type="radio" name="period" value="1" required> Looping 
-                      <!-- <input type="radio" name="period" value="2" required> Kirim Sekarang                         -->
+                      <input type="radio" name="period" value="2" required> Kirim Sekarang                        
                     </div>
                     <div class="form-group" style="display: none" id="onePeriod">
                       <div class="col-xs-12"> 
@@ -228,6 +228,8 @@
         $('#insertChannel')[0].reset();
         document.getElementById('loopPeriod').style.display = 'none';
         document.getElementById('onePeriod').style.display = 'none';
+        document.getElementById('kontenText').style.display = 'none';
+        document.getElementById('kontenImage').style.display = 'none';        
       });  
 
       //fungsi untuk pilihan radio button period
@@ -249,6 +251,14 @@
               document.getElementById('loopEvery').required = true;
               document.getElementById('dateSend').required = false;
               document.getElementById('timeSend').required = false;              
+            }else if(this.value=="2"){
+              document.getElementById('onePeriod').style.display = 'none';
+              document.getElementById('loopPeriod').style.display = 'none';              
+              document.getElementById('dateSend').required = false;
+              document.getElementById('timeSend').required = false;
+              document.getElementById('dateSend1').required = false;
+              document.getElementById('timeSend1').required = false;
+              document.getElementById('loopEvery').required = false; 
             }
         });
       });
