@@ -67,6 +67,16 @@ class Telegram extends CI_Controller {
 	//add and edit telegram proses
 	public function addProses()
 	{
+		if($this->input->post('kontenCat')=='0'){
+			$konten = $this->input->post('konten');
+			$contenImage = "";
+		}
+		else{
+			$konten = $this->input->post('captionImage');
+			$contenImage = $this->input->post('imageSend');
+		}	
+
+
 		if($this->input->post('idChannel') ==''){
 			if($this->input->post('period')=="1"){
 				$timeto24 = date("H:i", strtotime($this->input->post('timeSend1')));
@@ -74,25 +84,27 @@ class Telegram extends CI_Controller {
 					'nama_proses'	=> $this->input->post('namaChannel'),
 					'looping'		=> $this->input->post('period'),
 					'channel_id'	=> $this->input->post('channelID'),
-					'konten'		=> $this->input->post('konten'),					
+					'konten'		=> $konten,					
 					'loopevery' 	=> $this->input->post('loopEvery'),
 					'startdatetime' => $this->input->post('dateSend1')." ".$timeto24,
+					'type_konten'	=> $this->input->post('kontenCat'),
+					'image_konten'	=> $contenImage,
 				);
-			}else{
+			}else if($this->input->post('period')=="0"){
 				$timeto24 = date("H:i", strtotime($this->input->post('timeSend')));
 				$data = array(
 					'nama_proses'	=> $this->input->post('namaChannel'),
 					'looping'		=> $this->input->post('period'),
 					'channel_id'	=> $this->input->post('channelID'),
-					'konten'		=> $this->input->post('konten'),					
+					'konten'		=> $konten,					
 					'startdatetime' => $this->input->post('dateSend')." ".$timeto24,
+					'type_konten'	=> $this->input->post('kontenCat'),
+					'image_konten'	=> $contenImage,
 				);				
 			}
 
 			$this->db->insert('telegram_proses', $data);
 		}else{
-
-
 			if($this->input->post('period')=="1"){
 				$timeto24 = date("H:i", strtotime($this->input->post('timeSend1')));
 				$dateTime = $this->input->post('dateSend1')." ".$timeto24;
@@ -105,13 +117,15 @@ class Telegram extends CI_Controller {
 					'nama_proses'	=> $this->input->post('namaChannel'),
 					'looping'		=> $this->input->post('period'),
 					'channel_id'	=> $this->input->post('channelID'),
-					'konten'		=> $this->input->post('konten'),					
+					'konten'		=> $konten,					
 					'loopevery' 	=> $this->input->post('loopEvery'),
 					'startdatetime' => $this->input->post('dateSend1')." ".$timeto24,
 					'send_status'	=> '0',
 					'status'		=> $status,
+					'type_konten'	=> $this->input->post('kontenCat'),
+					'image_konten'	=> $contenImage,
 				);
-			}else{
+			}else if($this->input->post('period')=="0"){
 				$timeto24 = date("H:i", strtotime($this->input->post('timeSend')));
 				$dateTime = $this->input->post('dateSend')." ".$timeto24;
 				if((strtotime($dateTime))>(strtotime(date("Y-m-d H:i:s")))){
@@ -123,10 +137,12 @@ class Telegram extends CI_Controller {
 					'nama_proses'	=> $this->input->post('namaChannel'),
 					'looping'		=> $this->input->post('period'),
 					'channel_id'	=> $this->input->post('channelID'),
-					'konten'		=> $this->input->post('konten'),					
+					'konten'		=> $konten,					
 					'startdatetime' => $this->input->post('dateSend')." ".$timeto24,
 					'send_status'	=> '0',
 					'status'		=> $status,
+					'type_konten'	=> $this->input->post('kontenCat'),
+					'image_konten'	=> $contenImage,
 				);				
 			}
 

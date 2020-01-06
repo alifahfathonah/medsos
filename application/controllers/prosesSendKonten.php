@@ -11,13 +11,25 @@ class ProsesSendKonten extends CI_Controller {
 			$apiToken = $row->api_token;
 			$emoticons = '\U0001F4A8';
 			//$data['text'] =  "your text ".json_decode('"'.$emoticons.'"').' bla bla';
-			$data = [
-			    'chat_id' 		=> $row->chat_id,
-			    'text'			=> $row->konten,
-			    'parse_mode'	=> 'html',
-			];
+			if($row->type_konten=="0"){
+				$data = [
+				    'chat_id' 		=> $row->chat_id,
+				    'text'			=> $row->konten,
+				    'parse_mode'	=> 'html',
+				];
 
-			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+			}else{
+				$data = [
+					'chat_id' 		=> $row->chat_id,
+				    'photo'			=> $row->image_konten,
+				    'caption' 		=> $row->konten,
+				    'parse_mode'	=> 'html',
+				];
+
+				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendPhoto?" . http_build_query($data) );				
+			}
+
 			// $response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?chat_id=$row->chat_id&text=$row->konten&parse_mode=html");
 
 			if($row->looping =="0"){

@@ -79,7 +79,8 @@
                     <div class="form-group"> 
                       <label>Period</label><br/>  
                       <input type="radio" name="period" value="0" required> One Time
-                      <input type="radio" name="period" value="1" required> Looping                        
+                      <input type="radio" name="period" value="1" required> Looping 
+                      <!-- <input type="radio" name="period" value="2" required> Kirim Sekarang                         -->
                     </div>
                     <div class="form-group" style="display: none" id="onePeriod">
                       <div class="col-xs-12"> 
@@ -115,9 +116,25 @@
                         </div>
                     </div>                            
                     <div class="form-group"> 
-                      <label>Konten</label>  
-                      <textarea class="textarea" placeholder="Place some text here" name="konten" id="konten"
-                      style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px; max-width: 560px;min-width: 560px;max-height: 140px;min-height: 140px;" oninput="myFunction()" required></textarea>
+                      <label>Konten</label><br/> 
+                      <input type="radio" name="kontenCat" value="0" required> Text Only
+                      <input type="radio" name="kontenCat" value="1" required> With Image
+                      <div class="form-group" id="kontenText" style="display: none">
+                        <div class="form-group">
+                          <label>Isi Konten</label>  
+                          <textarea class="textarea" placeholder="Place some text here" name="konten" id="konten"
+                      style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px; max-width: 560px;min-width: 560px;max-height: 140px;min-height: 140px;"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group" id="kontenImage" style="display: none">
+                        <div class="form-group">
+                          <label>Image Source</label>                         
+                          <input type="text" name="imageSend" id="imageSend" class="form-control"/> 
+                          <label>Isi Konten</label>
+                          <textarea class="textarea" placeholder="Place some text here" name="captionImage" id="captionImage"
+                      style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px; max-width: 560px;min-width: 560px;max-height: 140px;min-height: 140px;"></textarea> 
+                        </div>                         
+                      </div>
                       <!-- <textarea id="lol"></textarea> -->
                       <input type="hidden" name="idChannel" id="idChannel" class="form-control" />
                     </div>
@@ -236,6 +253,25 @@
         });
       });
 
+      //fungsi untuk pilihan radio button type message
+      $(document).ready(function() {
+        $('input:radio[name=kontenCat]').change(function() {
+            if (this.value == '0') {
+              document.getElementById('kontenText').style.display = 'inline';
+              document.getElementById('kontenImage').style.display = 'none';
+              document.getElementById('konten').required = true;
+              document.getElementById('captionImage').required = false;
+              document.getElementById('imageSend').required = false;
+            }else if(this.value=="1"){
+              document.getElementById('kontenText').style.display = 'none';
+              document.getElementById('kontenImage').style.display = 'inline';
+              document.getElementById('captionImage').required = true;
+              document.getElementById('imageSend').required = true;
+              document.getElementById('konten').required = false;          
+            }
+        });
+      });      
+
     //insert atau update channel
     $(document).ready(function() {
       $('#insertChannel').on("submit", function(event){    
@@ -347,6 +383,22 @@
                     $('#timeSend1').val(data.jam);
                     $('#loopEvery').val(data.loopevery);
                     $('input[name=period][value=1]').prop('checked',true);
+                }
+
+                if(data.type_konten=="0"){
+                  document.getElementById('kontenText').style.display = 'inline';
+                  document.getElementById('kontenImage').style.display = 'none';                  
+                  $('input[name=kontenCat][value=0]').prop('checked',true);
+                  document.getElementById('konten').value = data.konten;
+                  document.getElementById('captionImage').value = "";
+                  document.getElementById('imageSend').value = "";                  
+                }else{
+                  document.getElementById('kontenText').style.display = 'none';
+                  document.getElementById('kontenImage').style.display = 'inline';                  
+                  $('input[name=kontenCat][value=1]').prop('checked',true);
+                  document.getElementById('konten').value = "";
+                  document.getElementById('captionImage').value = data.konten;
+                  document.getElementById('imageSend').value = data.image_konten;                   
                 }
 
                 $('#namaChannel').val(data.nama_proses);
