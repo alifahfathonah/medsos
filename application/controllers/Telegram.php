@@ -2,6 +2,17 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Telegram extends CI_Controller {
+	public function __construct()
+	{
+		parent::__construct();
+		
+		$this->asd = $this->session->userdata('key');
+
+		if(!$this->asd){
+			redirect(LOGIN_PAGE);
+		}
+	}
+
 
 	public function index()
 	{

@@ -1,3 +1,26 @@
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Logout</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Apakah anda yakin akan keluar dari aplikasi ini</p>
+                        </div>
+                        <div class="modal-footer">
+                            <!-- <a href="<?php echo site_url('login/logout') ?>"> -->
+                            <a href="<?php echo site_url('login/logout') ?>"> 
+                                <button class="btn btn-primary">Ya</button>
+                            </a>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
   <header class="main-header">
     <!-- Logo -->
     <a href="<?php echo base_url();?>" class="logo">
@@ -21,7 +44,7 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Welcome, <span class="hidden-xs">Alexander Pierce</span>
+              Welcome, <span class="hidden-xs"><?php echo $this->asd['nama'];?></span>
             </a>
             <ul class="dropdown-menu" style="height: 50px">
               <li>

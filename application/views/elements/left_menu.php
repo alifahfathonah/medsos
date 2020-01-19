@@ -41,7 +41,7 @@
           </a>
         </li></noscript>                        
         <li <?php 
-         $menu_trans_arr= array('whatsapp','instagram','telegram','facebook');
+         $menu_trans_arr= array('whatsapp','instagram','telegram','facebook','masterUser');
          if(in_array($this->uri->segment(2), $menu_trans_arr)) {echo "class='treeview active'";}else{echo "class='treeview'";}?>>
           <a href="#">
             <i class="fa fa-gear"></i>
@@ -65,6 +65,9 @@
               <a href="<?php echo base_url("setting/whatsapp");?>"><i class="fa fa-whatsapp"></i> Whats App</a>
             </li>
             </noscript>
+            <li class="<?php if ($this->uri->segment(2) == 'masterUser') { echo "active"; } ?>">
+              <a href="<?php echo base_url("setting/masterUser");?>"><i class="fa fa-user"></i> Master User</a>
+            </li>            
           </ul>
         </li>
       </ul>
