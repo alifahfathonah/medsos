@@ -53,7 +53,7 @@ class ProsesSendKonten extends CI_Controller {
 					$nextSend = date('Y-m-d H:i:s', strtotime($row->startdatetime . ' +1 days'));
 				}
 				else{
-					$nextSend = date('Y-m-d H:i:s', strtotime($row->startdatetime . ' +'. $row->loopevery .' minutes'));
+					$nextSend = date('Y-m-d H:i:s', strtotime($row->startdatetime . ' +'. $row->loopevery .' '.$row->looptime));
 				}	
 				
 				$data = array(

@@ -21,7 +21,7 @@
 				<td><center><?php echo $i; ?></center></td>
 				<td><center><?php echo $row->nama_proses; ?></center></td>
 				<td><center><?php echo $this->Fungsi->dateTime2($row->startdatetime); ?></center></td>
-				<td><center><?php echo $row->loopevery; ?> Minutes</center></td>
+				<td><center><?php echo $row->loopevery." ".$row->looptime ?></center></td>
 				<td><center><?php echo $row->channel_name; ?></center></td>
 				<td><center><a href="#" class="viewKonten" id="<?php echo $row->id_telegram_proses;?>">View</a></center></td>
 				<td>

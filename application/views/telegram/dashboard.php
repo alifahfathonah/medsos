@@ -5,7 +5,7 @@
           <h3 class="box-title"><?php echo $title;?></h3>
         </div>
         <div class="box-body">
-          <input type="button" value="Tambah Penjualan" class="btn btn-info btn-xs addTelegram" /><br/><br/>
+          <input type="button" value="Tambah Proses" class="btn btn-info btn-xs addTelegram" /><br/><br/>
           <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#nonLoop">Channel Non Looping</a></li>
             <li><a data-toggle="tab" href="#done">Channel Non Looping Done</a></li>
@@ -62,7 +62,7 @@
                      <h4 class="modal-title">Menambahkan Proses Telegram</h4>  
                 </div>  
                 <div class="modal-body">  
-                  <form method="post" id="insertChannel">
+                  <form method="post" id="insertChannel" autocomplete="off">
                     <div class="form-group">  
                       <label>Nama Proses</label>  
                       <input type="text" name="namaChannel" id="namaChannel" class="form-control" required/> 
@@ -95,25 +95,35 @@
                     </div>
                     <div class="form-group" style="display: none" id="loopPeriod">
                       <div class="col-xs-12">
-                        <label>Send Time :</label>
+                        <label>Send First Time :</label>
                       </div>
-                       <div class="col-xs-4">
+                       <div class="col-xs-8">
                           <input type="date" name="dateSend1" class="form-control" id="dateSend1" value="<?php echo date("m/d/Y");?>">
                         </div>
                       <div class="col-xs-4">
                           <input type="time" name="timeSend1" class="form-control" id="timeSend1" value="<?php echo date("h:i A");?>"><br/>
-                      </div>                                 
-                        <div class="col-xs-4">
-                            <select class="form-control" name="loopEvery" id="loopEvery">
+                      </div>   
+                      <div class="col-xs-12">
+                        <label>Looping Time :</label>
+                      </div>                                                   
+                        <div class="col-xs-6">
+                            <select class="form-control" name="loopEvery" id="loopEvery" required="required">
                               <option value=""> - Choose Time Period - </option>
-                              <option value="0"> Every This Time </option>
-                              <?php for($i=1;$i<=12;$i++){
-                                  $k= 5 * $i;
+                              <option value="0"> Loop every this time </option>
+                              <?php for($i=1;$i<=60;$i++){
+                                  $k= 1 * $i;
                               ?>
-                              <option value="<?php echo $k;?>">Every <?php echo $k;?> Minute</option>
+                              <option value="<?php echo $k;?>">Every <?php echo $k;?></option>
                               <?php }?>
                             </select><br/>
                         </div>
+                        <div class="col-xs-6">
+                            <select class="form-control" name="looptime" id="looptime" required="required">
+                              <option value=""> - Choose Time Period - </option>
+                              <option value="minutes">Minutes</option>
+                              <option value="hours">Hours</option>
+                            </select><br/>
+                        </div>                        
                     </div>                            
                     <div class="form-group"> 
                       <label>Konten</label><br/> 
@@ -136,10 +146,11 @@
                         </div>                         
                       </div>
                       <!-- <textarea id="lol"></textarea> -->
-                      <input type="hidden" name="idChannel" id="idChannel" class="form-control" />
+                      
                     </div>
                 </div>  
                 <div class="modal-footer">
+                        <input type="hidden" name="idChannel" id="idChannel" class="form-control" />
                         <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-primary" /> 
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>  
