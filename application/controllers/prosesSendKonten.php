@@ -18,7 +18,8 @@ class ProsesSendKonten extends CI_Controller {
 				    'parse_mode'	=> 'html',
 				];
 
-				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+				// $response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+				$response = "https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data);
 			}else{
 				$data = [
 					'chat_id' 		=> $row->chat_id,
@@ -27,10 +28,20 @@ class ProsesSendKonten extends CI_Controller {
 				    'parse_mode'	=> 'html',
 				];
 
-				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendPhoto?" . http_build_query($data) );				
+				// $response = file_get_contents("https://api.telegram.org/bot$apiToken/sendPhoto?" . http_build_query($data) );	
+				$response = "https://api.telegram.org/bot$apiToken/sendPhoto?" . http_build_query($data);
 			}
 
-			// $response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?chat_id=$row->chat_id&text=$row->konten&parse_mode=html");
+            $c = curl_init();
+            curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($c, CURLOPT_URL, $response);
+            $contents = curl_exec($c);
+            curl_close($c);
+    
+            // if ($contents){ return $contents;}
+            // else{ return FALSE;}
+
+			// $response = file_contents("https://api.telegram.org/bot$apiToken/sendMessage?chat_id=$row->chat_id&text=$row->konten&parse_mode=html");
 
 			if($row->looping =="0"){
 				$data = array(

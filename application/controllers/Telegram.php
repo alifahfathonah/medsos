@@ -101,7 +101,8 @@ class Telegram extends CI_Controller {
 				    'parse_mode'	=> 'html',
 				];
 
-				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($datar) );
+				// $response =  file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($datar) );
+				$response = "https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($datar);
 			}else{
 				$datar = [
 					'chat_id' 		=> $row->chat_id,
@@ -110,8 +111,18 @@ class Telegram extends CI_Controller {
 				    'parse_mode'	=> 'html',
 				];
 
-				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendPhoto?" . http_build_query($datar) );				
+				// $response =  file_get_contents("https://api.telegram.org/bot$apiToken/sendPhoto?" . http_build_query($datar) );	
+				$response = "https://api.telegram.org/bot$apiToken/sendPhoto?" . http_build_query($datar);
 			}
+
+            $c = curl_init();
+            curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($c, CURLOPT_URL, $response);
+            $contents = curl_exec($c);
+            curl_close($c);
+    
+            // if ($contents){ return $contents;}
+            // else{ return FALSE;}
 
 			$status = "1";
 			$sendSTatus = "1";
