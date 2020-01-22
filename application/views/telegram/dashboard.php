@@ -87,10 +87,10 @@
                         <label>Send Time :</label>
                       </div>
                       <div class="col-xs-8">
-                          <input type="date" name="dateSend" class="form-control" id="dateSend" value="<?php echo date("m/d/Y");?>">
+                          <input type="date" name="dateSend" class="form-control" id="dateSend">
                       </div>
                       <div class="col-xs-4">
-                          <input type="time" name="timeSend" class="form-control" id="timeSend" value="<?php echo date("h:i A");?>"><br/>
+                          <input type="time" name="timeSend" class="form-control" id="timeSend"><br/>
                       </div>                            
                     </div>
                     <div class="form-group" style="display: none" id="loopPeriod">
@@ -98,16 +98,16 @@
                         <label>Send First Time :</label>
                       </div>
                        <div class="col-xs-8">
-                          <input type="date" name="dateSend1" class="form-control" id="dateSend1" value="<?php echo date("m/d/Y");?>">
+                          <input type="date" name="dateSend1" class="form-control" id="dateSend1">
                         </div>
                       <div class="col-xs-4">
-                          <input type="time" name="timeSend1" class="form-control" id="timeSend1" value="<?php echo date("h:i A");?>"><br/>
+                          <input type="time" name="timeSend1" class="form-control" id="timeSend1"><br/>
                       </div>   
                       <div class="col-xs-12">
                         <label>Looping Time :</label>
                       </div>                                                   
                         <div class="col-xs-6">
-                            <select class="form-control" name="loopEvery" id="loopEvery" required="required">
+                            <select class="form-control" name="loopEvery" id="loopEvery">
                               <option value=""> - Choose Time Period - </option>
                               <option value="0"> Loop every this time </option>
                               <?php for($i=1;$i<=60;$i++){
@@ -118,7 +118,7 @@
                             </select><br/>
                         </div>
                         <div class="col-xs-6">
-                            <select class="form-control" name="looptime" id="looptime" required="required">
+                            <select class="form-control" name="looptime" id="looptime">
                               <option value=""> - Choose Time Period - </option>
                               <option value="minutes">Minutes</option>
                               <option value="hours">Hours</option>
@@ -131,7 +131,23 @@
                       <input type="radio" name="kontenCat" value="1" required> With Image
                       <div class="form-group" id="kontenText" style="display: none">
                         <div class="form-group">
-                          <label>Isi Konten</label>  
+                          <label>Isi Konten</label><br/>
+                          <span id="emoji">
+                              <a href="#" title="&amp;#x1F680; ">&#x1F680;</a>&nbsp;
+                              <a href="#" title="&amp;#x1F525; ">&#x1F525;</a>&nbsp;
+                              <a href="#" title="&amp;#x1F4AF; ">&#x1F4AF;</a>&nbsp;
+                              <a href="#" title="&amp;#x1F3AE; ">&#x1F3AE;</a>&nbsp;
+                              <a href="#" title="&amp;#x2705; ">&#x2705;</a>&nbsp;
+                              <a href="#" title="&amp;#x274C; ">&#x274C;</a>&nbsp;
+                              <a href="#" title="&amp;#x26A0; ">&#x26A0;</a>&nbsp;
+                              <a href="#" title="&amp;#x26D4; ">&#x26D4;</a>&nbsp;
+                              <a href="#" title="&amp;#x2B06; ">&#x2B06;</a>&nbsp;
+                              <a href="#" title="&amp;#x2B07; ">&#x2B07;</a>&nbsp;
+                              <a href="#" title="&amp;#x26D4; ">&#x26D4;</a>&nbsp;
+                              <a href="#" title="&amp;#x1F4E2; ">&#x1F4E2;</a>&nbsp;
+                              <a href="#" title="&amp;#x26AB; ">&#x26AB;</a>&nbsp;
+                          </span><br/><br/>
+
                           <textarea class="textarea" placeholder="Place some text here" name="konten" id="konten"
                       style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px; max-width: 560px;min-width: 560px;max-height: 140px;min-height: 140px;"></textarea>
                         </div>
@@ -140,7 +156,23 @@
                         <div class="form-group">
                           <label>Image Source</label>                         
                           <input type="text" name="imageSend" id="imageSend" class="form-control"/> 
-                          <label>Isi Konten</label>
+                          <label>Isi Konten</label><br/>
+                          <span id="emoticons">
+                              <a href="#" title="&amp;#x1F680; ">&#x1F680;</a>&nbsp;
+                              <a href="#" title="&amp;#x1F525; "> &#x1F525;</a>&nbsp;
+                              <a href="#" title="&amp;#x1F4AF; ">&#x1F4AF;</a>&nbsp;
+                              <a href="#" title="&amp;#x1F3AE; ">&#x1F3AE;</a>&nbsp;
+                              <a href="#" title="&amp;#x2705; ">&#x2705;</a>&nbsp;
+                              <a href="#" title="&amp;#x274C; ">&#x274C;</a>&nbsp;
+                              <a href="#" title="&amp;#x26A0; ">&#x26A0;</a>&nbsp;
+                              <a href="#" title="&amp;#x26D4; ">&#x26D4;</a>&nbsp;
+                              <a href="#" title="&amp;#x2B06; ">&#x2B06;</a>&nbsp;
+                              <a href="#" title="&amp;#x2B07; ">&#x2B07;</a>&nbsp;
+                              <a href="#" title="&amp;#x26D4; ">&#x26D4;</a>&nbsp;
+                              <a href="#" title="&amp;#x1F4E2; ">&#x1F4E2;</a>&nbsp;
+                              <a href="#" title="&amp;#x26AB; ">&#x26AB;</a>&nbsp;
+                              <!-- <input type="button" class="button" onclick="changeText()" value="Word View"> -->
+                          </span><br/><br/>
                           <textarea class="textarea" placeholder="Place some text here" name="captionImage" id="captionImage"
                       style="font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px; max-width: 560px;min-width: 560px;max-height: 140px;min-height: 140px;"></textarea> 
                         </div>                         
@@ -192,7 +224,7 @@
                   <h4 class="modal-title">Isi Konten</h4>
               </div>
               <div class="modal-body">
-                  <p><span id="showKonten"></span></p>
+                  <p><span id="showKonten" style="white-space: pre-line;"></span></p>
               </div>
               <div class="modal-footer">
                 <input type="button" name="cancel" value="Cancel" class="btn btn-success" data-dismiss="modal"/>
@@ -225,6 +257,13 @@
   </div>    
 
 <script>
+
+    function changeText() {
+      // body...
+      var source = encodeURIComponent(document.getElementById('captionImage').value);
+      document.getElementById('captionImage').value = source;
+      // alert(source);
+    }
       //konvert konten
       // function myFunction() {
       //   var a = document.getElementById("konten").value;
@@ -482,5 +521,23 @@
   // CKEDITOR.replace( 'konten', {
   //   //toolbar: 'Bold'
   // } );
+
+$('#emoticons a').click(function() {
+    var smiley = $(this).attr('title');
+    ins2pos(smiley, 'captionImage');
+});
+
+$('#emoji a').click(function() {
+    var smiley = $(this).attr('title');
+    ins2pos(smiley, 'konten');
+});
+
+function ins2pos(str, id) {
+   var TextArea = document.getElementById(id);
+   var val = TextArea.value;
+   var before = val.substring(0, TextArea.selectionStart);
+   var after = val.substring(TextArea.selectionEnd, val.length);
+   TextArea.value = before + str + after;
+}
 
 </script>
