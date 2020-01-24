@@ -183,6 +183,7 @@ class Telegram extends CI_Controller {
 				$data = array(
 					'nama_proses'	=> $this->input->post('namaChannel'),
 					'looping'		=> $this->input->post('period'),
+					'looptime' 		=> $this->input->post('looptime'),
 					'channel_id'	=> $this->input->post('channelID'),
 					'konten'		=> $konten,					
 					'loopevery' 	=> $this->input->post('loopEvery'),
@@ -203,6 +204,7 @@ class Telegram extends CI_Controller {
 				$data = array(
 					'nama_proses'	=> $this->input->post('namaChannel'),
 					'looping'		=> $this->input->post('period'),
+					'looptime' 		=> $this->input->post('looptime'),
 					'channel_id'	=> $this->input->post('channelID'),
 					'konten'		=> $konten,					
 					'startdatetime' => $this->input->post('dateSend')." ".$timeto24,
@@ -215,6 +217,7 @@ class Telegram extends CI_Controller {
 				$data = array(
 					'nama_proses'	=> $this->input->post('namaChannel'),
 					'looping'		=> $this->input->post('period'),
+					'looptime' 		=> $this->input->post('looptime'),
 					'channel_id'	=> $this->input->post('channelID'),
 					'konten'		=> $konten,					
 					'startdatetime' => date('Y-m-d H:i:s'),
