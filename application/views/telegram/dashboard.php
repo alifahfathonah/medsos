@@ -278,7 +278,8 @@
 
         //menampilkan modal insert
       $(document).on('click', '.addTelegram', function(){  
-        $('.formAddProses').modal('show');  
+        $('.formAddProses').modal('show');
+        $('#idChannel').val('');  
         $('#insertChannel')[0].reset();
         document.getElementById('loopPeriod').style.display = 'none';
         document.getElementById('onePeriod').style.display = 'none';
@@ -296,13 +297,15 @@
               document.getElementById('timeSend').required = true;
               document.getElementById('dateSend1').required = false;
               document.getElementById('timeSend1').required = false;
-              document.getElementById('loopEvery').required = false; 
+              document.getElementById('loopEvery').required = false;
+              document.getElementById('looptime').required = false; 
             }else if(this.value=="1"){
               document.getElementById('onePeriod').style.display = 'none';
               document.getElementById('loopPeriod').style.display = 'inline';
               document.getElementById('dateSend1').required = true;
               document.getElementById('timeSend1').required = true;
               document.getElementById('loopEvery').required = true;
+              document.getElementById('looptime').required = true; 
               document.getElementById('dateSend').required = false;
               document.getElementById('timeSend').required = false;              
             }else if(this.value=="2"){
@@ -312,7 +315,8 @@
               document.getElementById('timeSend').required = false;
               document.getElementById('dateSend1').required = false;
               document.getElementById('timeSend1').required = false;
-              document.getElementById('loopEvery').required = false; 
+              document.getElementById('loopEvery').required = false;
+              document.getElementById('looptime').required = false; 
             }
         });
       });
@@ -437,6 +441,7 @@
                     $('#dateSend1').val('');
                     $('#timeSend1').val('');
                     $('#loopEvery').val('');
+                    $('#looptime').val('');
                     $('input[name=period][value=0]').prop('checked',true);
                 }else{
                     document.getElementById('loopPeriod').style.display = 'inline';
@@ -446,6 +451,7 @@
                     $('#dateSend1').val(data.tanggal);
                     $('#timeSend1').val(data.jam);
                     $('#loopEvery').val(data.loopevery);
+                    $('#looptime').val(data.looptime);
                     $('input[name=period][value=1]').prop('checked',true);
                 }
 
