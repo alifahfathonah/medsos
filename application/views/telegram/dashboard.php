@@ -147,6 +147,7 @@
                               <a href="#" title="&amp;#x1F4E2; ">&#x1F4E2;</a>&nbsp;
                               <a href="#" title="&amp;#x26AB; ">&#x26AB;</a>&nbsp;
                               <a href="#" title="&amp;#x26A1; ">&#x26A1;</a>&nbsp;
+                              <a href="#" title="%5Bgreeting%5D "><strong>Greeting</strong></a>&nbsp;
                           </span><br/><br/>
 
                           <textarea class="textarea" placeholder="Place some text here" name="konten" id="konten"
@@ -173,6 +174,7 @@
                               <a href="#" title="&amp;#x1F4E2; ">&#x1F4E2;</a>&nbsp;
                               <a href="#" title="&amp;#x26AB; ">&#x26AB;</a>&nbsp;
                               <a href="#" title="&amp;#x26A1; ">&#x26A1;</a>&nbsp;
+                              <a href="#" title="%5Bgreeting%5D "><strong>Greeting</strong></a>&nbsp;
                               <!-- <input type="button" class="button" onclick="changeText()" value="Word View"> -->
                           </span><br/><br/>
                           <textarea class="textarea" placeholder="Place some text here" name="captionImage" id="captionImage"

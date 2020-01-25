@@ -93,7 +93,25 @@ class Telegram extends CI_Controller {
 		$row = $this->db->query("SELECT * FROM telegram_channel WHERE id_channel='$idchan'")->row();
 		$apiToken = $row->api_token;
 
+		$time = strtotime(date('H:i:s'));
+		if(($time > "1579899600") AND ($time < "1579921200")){
+			$konten = str_replace("%5Bgreeting%5D","<b>Selamat Pagi Bapak/Ibu</b>",$konten);
+			// echo "selamat pagi";
+		}else if(($time > "1579921201") AND ($time < "1579935600")){
+			$konten = str_replace("%5Bgreeting%5D","<b>Selamat Siang Bapak/Ibu</b>",$konten);
+			// echo "selamat siang";
+		}else if(($time > "1579935601") AND ($time < "1579951800")){
+			$konten = str_replace("%5Bgreeting%5D","<b>Selamat Sore Bapak/Ibu</b>",$konten);
+			// echo "selamat sore";
+		}else if(($time > "1579951801") AND ($time < "1579971540")){
+			$konten = str_replace("%5Bgreeting%5D","<b>Selamat Malam Bapak/Ibu</b>",$konten);
+			// echo "selamat malam";
+		}else{
+			$konten = str_replace("%5Bgreeting%5D","",$konten);
+		}
+
 		if($this->input->post('period')=="2"){
+			$tester = "pagi";
 			if($this->input->post('kontenCat')=="0"){
 				$datar = [
 				    'chat_id' 		=> $row->chat_id,

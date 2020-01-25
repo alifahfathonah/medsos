@@ -9,8 +9,25 @@ class ProsesSendKonten extends CI_Controller {
 
 		foreach ($query -> result() as $row) {
 			$apiToken = $row->api_token;
-			$emoticons = '\U0001F4A8';
+			// $emoticons = '\U0001F4A8';
 			//$data['text'] =  "your text ".json_decode('"'.$emoticons.'"').' bla bla';
+			$time = strtotime(date('H:i:s'));
+			if(($time > "1579899600") AND ($time < "1579921200")){
+				$row->konten = str_replace("%5Bgreeting%5D","<b>Selamat Pagi Bapak/Ibu</b>",$row->konten);
+				// echo "selamat pagi";
+			}else if(($time > "1579921201") AND ($time < "1579935600")){
+				$row->konten = str_replace("%5Bgreeting%5D","<b>Selamat Siang Bapak/Ibu</b>",$row->konten);
+				// echo "selamat siang";
+			}else if(($time > "1579935601") AND ($time < "1579951800")){
+				$row->konten = str_replace("%5Bgreeting%5D","<b>Selamat Sore Bapak/Ibu</b>",$row->konten);
+				// echo "selamat sore";
+			}else if(($time > "1579951801") AND ($time < "1579971540")){
+				$row->konten = str_replace("%5Bgreeting%5D","<b>Selamat Malam Bapak/Ibu</b>",$row->konten);
+				// echo "selamat malam";
+			}else{
+				$row->konten = str_replace("%5Bgreeting%5D","",$row->konten);
+			}
+
 			if($row->type_konten=="0"){
 				$data = [
 				    'chat_id' 		=> $row->chat_id,
